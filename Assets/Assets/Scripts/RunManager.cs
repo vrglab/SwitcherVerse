@@ -143,7 +143,7 @@ public class RunManager : PersistantSingleton<RunManager>
 
 }
 
-
+[Serializable]
 public struct Run
 {
     public RunData RunData;

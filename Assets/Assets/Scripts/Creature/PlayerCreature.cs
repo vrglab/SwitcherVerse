@@ -8,6 +8,8 @@ public class PlayerCreature : Creature
 {
     Rigidbody2D rg_body;
 
+    public float speed;
+
     [Serializable]
     struct SerializedVector2
     {
@@ -33,6 +35,18 @@ public class PlayerCreature : Creature
     protected override void Movement()
     {
         DimensionalState dimensionalState = RunManager.Instance.CurrentSettings.GetSetting<DimensionalState>("dm_state");
+
+        float y_movement = InputManager.Instance.GetValueData<float>("pl_mv_y");
+        float x_movement = InputManager.Instance.GetValueData<float>("pl_mv_x");
+        switch (dimensionalState)
+        {
+            case DimensionalState.ThreeD:
+                transform.position = new Vector2(
+                    transform.position.x - speed * x_movement * Time.deltaTime,
+                    transform.position.y + speed * y_movement * Time.deltaTime
+                    );
+                break;
+        }
     }
 
     public void Update()
